@@ -1,0 +1,17 @@
+version: '3.2'
+
+services:
+  aws-multi-account-test-api:
+    image: aws-multi-account-second-test-api
+    build:
+      context: aws-multi-account-second-test-api/
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+
+
+  aws-multi-account-test-api-test:
+    image: aws-multi-account-test-api-test
+    build:
+      context: .
+      dockerfile: aws-multi-account-second-test-api.Tests/Dockerfile
