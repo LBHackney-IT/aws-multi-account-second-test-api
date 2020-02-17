@@ -59,7 +59,7 @@ jobs:
     steps:
       - deploy-env:
           cluster-name: "$DEVELOPMENT_CLUSTER"
-          service-name: 'aws-multi-account-test-api-development'
+          service-name: $AWS_SERVICE_NAME
           image-tag: "$CIRCLE_SHA1"
 
 workflows:
