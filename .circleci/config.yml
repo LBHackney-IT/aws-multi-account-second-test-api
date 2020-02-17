@@ -48,10 +48,10 @@ jobs:
       - setup_remote_docker
       - run:
           name: build
-          command: docker-compose build aws-multi-account-test-api-test
+          command: docker-compose build aws-multi-account-second-test-api-test
       - run:
           name: Run tests
-          command: docker-compose run aws-multi-account-test-api-test
+          command: docker-compose run aws-multi-account-second-test-api-test
 
   deploy-to-development:
     docker:
@@ -68,8 +68,8 @@ workflows:
       - check
       - aws-ecr/build_and_push_image:
           name: build_and_push_image
-          dockerfile: ./aws-multi-account-test-api/Dockerfile
-          path: ./aws-multi-account-test-api
+          dockerfile: ./aws-multi-account-second-test-api/Dockerfile
+          path: ./aws-multi-account-second-test-api
           account-url: AWS_ECR_HOST
           repo: $AWS_ECR_PATH
           aws-access-key-id: AWS_ACCESS_KEY_ID
