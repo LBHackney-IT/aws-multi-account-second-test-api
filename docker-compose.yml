@@ -1,7 +1,7 @@
 version: '3.2'
 
 services:
-  aws-multi-account-test-api:
+  aws-multi-account-second-test-api:
     image: aws-multi-account-second-test-api
     build:
       context: aws-multi-account-second-test-api/
@@ -10,7 +10,7 @@ services:
       - 3000:3000
 
 
-  aws-multi-account-test-api-test:
+  aws-multi-account-second-test-api-test:
     image: aws-multi-account-test-api-test
     build:
       context: .
