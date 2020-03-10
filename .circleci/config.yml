@@ -32,7 +32,11 @@ commands:
             << parameters.service-name >> \
             -t << parameters.image-tag >>
           no_output_timeout: 30m
-
+executors: 
+  docker-terraform: 
+    docker: 
+      - 
+        image: "hashicorp/terraform:light"
 jobs:
   check:
     docker:
@@ -61,11 +65,27 @@ jobs:
           cluster-name: "$DEVELOPMENT_CLUSTER"
           service-name: $AWS_SERVICE_NAME
           image-tag: "$CIRCLE_SHA1"
+  terraform-init: 
+    executor: docker-terraform
+    steps: 
+      - checkout
+      - 
+        run: 
+          command: |
+              cd ./terraform/    
+              terraform init
+          name: init
+      - run:
+          name: plan
+          command: |
+            cd ./terraform/   
+            terraform plan
 
 workflows:
   build-and-deploy:
       jobs:
       - check
+      - terraform-init
       - aws-ecr/build_and_push_image:
           name: build_and_push_image
           dockerfile: ./aws-multi-account-second-test-api/Dockerfile
